@@ -5,10 +5,6 @@ Output:
 - data.csv
 - all submissions' images in the images/ directory (under the output directory)
 
-Usage:
-- python3 crawl.py
-- python3 crawl.py /path/to/output/directory
-
 Warning:
 Use with caution because this script will download all images from the website.
 And the script doesn't check if the image is an actual image or not, it could be a virus.
