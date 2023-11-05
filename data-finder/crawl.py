@@ -1,5 +1,5 @@
 """
-This script crawl data from https://vote.funtown.com.hk/talesrunner/vote_rank.
+This script crawls data from https://vote.funtown.com.hk/talesrunner/vote_rank.
 
 Output: 
 - data.csv
