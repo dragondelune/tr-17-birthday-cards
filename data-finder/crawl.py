@@ -21,12 +21,14 @@ from bs4 import BeautifulSoup
 import concurrent.futures
 from tqdm import tqdm
 
-HEADERS = ['id', 'name', 'subject', 'content', 'num_of_votes']
+HEADERS = ['id', 'name', 'subject', 'content', 'num_of_votes', 'file_name']
 
 parser = argparse.ArgumentParser(
     description='Crawl data from blacktown, download the images, and write the data to a CSV file.')
 parser.add_argument('--output_dir', default=".", type=pathlib.Path,
                     help='The directory to write the output files to.')
+parser.add_argument('--save_images', default=False, type=bool,
+                    help='Whether to save the images or not.')
 parser.add_argument('--csv_file_name', default='data.csv', type=str,
                     help='The name of the output CSV file.')
 parser.add_argument('--image_output_dir_name', default='images', type=str,
@@ -40,7 +42,6 @@ class Submission:
         self.subject = subject
         self.content = content
         self.num_of_votes = num_of_votes
-        # non csv fields
         self.file_name = file_name
 
     def getUrl(self):
@@ -85,7 +86,10 @@ def create_submission_from_info_div(info_div):
 
 
 def write_to_csv_file(submissions, output_dir, csv_output_file_name):
-    with open(os.path.join(output_dir, csv_output_file_name), 'w', newline='') as f:
+    csv_out_path = os.path.join(output_dir, csv_output_file_name)
+    os.makedirs(output_dir, exist_ok=True)
+
+    with open(csv_out_path, 'w', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=HEADERS)
         writer.writeheader()
 
@@ -95,15 +99,13 @@ def write_to_csv_file(submissions, output_dir, csv_output_file_name):
                 'name': submission.name,
                 'subject': submission.subject,
                 'content': submission.content,
-                'num_of_votes': submission.num_of_votes
+                'num_of_votes': submission.num_of_votes,
+                'file_name': submission.file_name,
             })
 
 
 def main():
     args = parser.parse_args()
-
-    img_out_path = os.path.join(args.output_dir, args.image_output_dir_name)
-    os.makedirs(img_out_path, exist_ok=True)
 
     r = requests.get('https://vote.funtown.com.hk/talesrunner/vote_rank')
     soup = BeautifulSoup(r.text, 'html.parser')
@@ -119,8 +121,11 @@ def main():
 
     write_to_csv_file(submissions, args.output_dir, args.csv_file_name)
 
-    img_output_dir = os.path.join(args.output_dir, args.image_output_dir_name)
-    download_images_in_parallel(submissions, img_output_dir)
+    if args.save_images:
+        img_out_path = os.path.join(
+            args.output_dir, args.image_output_dir_name)
+        os.makedirs(img_out_path, exist_ok=True)
+        download_images_in_parallel(submissions, img_out_path)
 
 
 if __name__ == '__main__':
