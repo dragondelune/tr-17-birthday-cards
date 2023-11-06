@@ -1,44 +1,43 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+<html lang="{{ page.lang | default: site.lang | default: " en" }}">
 
-  {%- include head.html -%}
+{%- include head.html -%}
 
-  <body class="is-preload">
+<body class="is-preload">
 
-    <div id="wrapper">
+  <div id="wrapper">
 
-      {%- include header.html -%}
+    {%- include header.html -%}
 
-      <div id="main">
-        {% for submission in site.data.submissions %}
-        <article class="thumb">
-          <a href="{{site.baseurl}}/assets/images/fulls/{{ submission.file_name }}" class="image">
-            {%comment%}
-            <!-- TODO: Make thumbnails for images -->
-            {%endcomment%}
-            <img src="{{site.baseurl}}/assets/images/fulls/{{ submission.file_name }}"
-              alt="{{ image.title }}" loading="lazy"/>
-          </a>
-          <h2>{{ submission.name }}, {{ submission.subject }}
-            <sup class="num-of-votes">{{ submission.num_of_votes | default: 0 }} 票</sup>
-          </h2>
-          <p>{{ submission.content }}</p>
-        </article>
-        {% endfor %}
-      </div>
-
-      {%- include footer.html -%}
-
+    <div id="main">
+      {% for submission in site.data.submissions %}
+      <article class="thumb">
+        <a href="{{site.baseurl}}/assets/images/fulls/{{ submission.file_name }}" class="image">
+          {%comment%}
+          <!-- TODO: Make thumbnails for images -->
+          {%endcomment%}
+          <img src="{{site.baseurl}}/assets/images/fulls/{{ submission.file_name }}" alt="{{ image.title }}"
+            loading="lazy" />
+        </a>
+        <h2>{{ submission.name }}, {{ submission.subject }}
+          <sup class="num-of-votes">{{ submission.num_of_votes | default: 0 }} 票</sup>
+        </h2>
+        <p>{{ submission.content }}</p>
+      </article>
+      {% endfor %}
     </div>
 
-    
-    <script src="{{ 'assets/js/jquery.min.js' | relative_url }}"></script>
-    <script src="{{ 'assets/js/jquery.poptrox.min.js' | relative_url }}"></script>
-    <script src="{{ 'assets/js/browser.min.js' | relative_url }}"></script>
-    <script src="{{ 'assets/js/breakpoints.min.js' | relative_url }}"></script>
-    <script src="{{ 'assets/js/util.js' | relative_url }}"></script>
-    <script src="{{ 'assets/js/main.js' | relative_url }}"></script>
-    
-  </body>
+    {%- include footer.html -%}
+
+  </div>
+
+  <script src="{{ 'assets/js/jquery.min.js' | relative_url }}"></script>
+  <script src="{{ 'assets/js/jquery.poptrox.min.js' | relative_url }}"></script>
+  <script src="{{ 'assets/js/browser.min.js' | relative_url }}"></script>
+  <script src="{{ 'assets/js/breakpoints.min.js' | relative_url }}"></script>
+  <script src="{{ 'assets/js/util.js' | relative_url }}"></script>
+  <script src="{{ 'assets/js/main.js' | relative_url }}"></script>
+
+</body>
 
 </html>
