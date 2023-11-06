@@ -2052,8 +2052,8 @@ input, select, textarea {
 
 /* Added on top of the template */
 
-	.num-of-votes {
-		color: #a0a0a1;
+	#main .thumb > h2 {
+		background: rgba(0, 0, 0, .7);
 	}
 
 	#footer section p {
