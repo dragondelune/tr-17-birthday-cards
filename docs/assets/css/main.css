@@ -1350,7 +1350,8 @@ input, select, textarea {
 			}
 
 			.poptrox-popup .caption {
-				display: none !important;
+				/* display: none !important; */
+				font-size: .5em;
 			}
 
 			.poptrox-popup .closer,
@@ -2048,3 +2049,13 @@ input, select, textarea {
 		#footer .copyright a {
 			color: inherit;
 		}
+
+/* Added on top of the template */
+
+	.num-of-votes {
+		color: #a0a0a1;
+	}
+
+	#footer section p {
+		white-space: pre-wrap;
+	}
