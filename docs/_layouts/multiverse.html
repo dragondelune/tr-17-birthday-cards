@@ -16,10 +16,14 @@
           <img src="{{site.baseurl}}/assets/images/thumbs/{{ submission.file_name }}" alt="{{ image.title }}"
             loading="lazy" />
         </a>
-        <h2>{{ submission.name }}, {{ submission.subject }}
-          <sup class="num-of-votes">{{ submission.num_of_votes | default: 0 }} 票</sup>
-        </h2>
-        <p>{{ submission.content }}</p>
+        <div class="info">
+          <div class="main-info">
+            <p class="info-name">{{ submission.name }}</p>
+            <p class="info-subject">{{ submission.subject }}</p>
+            <p class="info-votes">{{ submission.num_of_votes }} 票</p>
+          </div>
+          <p class="info-content">{{ submission.content }}</p>
+        </div>
       </article>
       {% endfor %}
     </div>

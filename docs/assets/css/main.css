@@ -2052,8 +2052,51 @@ input, select, textarea {
 
 /* Added on top of the template */
 
-	#main .thumb > h2 {
+	.info {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		left: 1em;
+		bottom: .5em;
+		position: absolute;
+		z-index: 1;
+	}
+
+	.info .main-info {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	#main .info p {
 		background: rgba(0, 0, 0, .7);
+	}
+
+	.info p {
+		padding: 0 0.5em;
+		margin: 0;
+		color: #ffffff;
+	}
+
+	.info .info-content {
+		display: none;
+	}
+	
+	.poptrox-popup .caption .info-content {
+		display: flex;
+	}
+	
+	.poptrox-popup .caption p {
+		background: rgba(0, 0, 0, .5);
+	}
+
+	.poptrox-popup .caption .info .main-info {
+		flex-direction: row;
+	}
+
+	.poptrox-popup .caption .info {
+		position: relative;
+		left: 0;
 	}
 
 	#footer section p {
