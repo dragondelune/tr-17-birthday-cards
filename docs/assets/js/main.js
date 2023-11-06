@@ -4,6 +4,18 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
+const updatedThumbSet = new Set();
+
+$.fn.isInViewport = function() {
+    var elementTop = $(this).offset().top;
+    var elementBottom = elementTop + $(this).outerHeight();
+
+    var viewportTop = $(window).scrollTop();
+    var viewportBottom = viewportTop + $(window).height();
+
+    return elementBottom > viewportTop && elementTop < viewportBottom;
+};
+
 (function($) {
 
 	var	$window = $(window),
@@ -210,31 +222,41 @@
 		var $main = $('#main');
 
 		// Thumbs.
-			$main.children('.thumb').each(function() {
+			function updateThumbBackground() {
+				$main.children('.thumb').each(function() {
+					var	$this = $(this);
+					if (updatedThumbSet.has($this) || !$this.isInViewport()) {
+						return;
+					}
 
-				var	$this = $(this),
+					var	$this = $(this),
 					$image = $this.find('.image'), $image_img = $image.children('img'),
 					x;
 
-				// No image? Bail.
-					if ($image.length == 0)
-						return;
+					// No image? Bail.
+						if ($image.length == 0)
+							return;
 
-				// Image.
-				// This sets the background of the "image" <span> to the image pointed to by its child
-				// <img> (which is then hidden). Gives us way more flexibility.
+					// Image.
+					// This sets the background of the "image" <span> to the image pointed to by its child
+					// <img> (which is then hidden). Gives us way more flexibility.
 
-					// Set background.
-						$image.css('background-image', 'url(' + $image_img.attr('src') + ')');
+						// Set background.
+							$image.css('background-image', 'url(' + $image_img.attr('src') + ')');
 
-					// Set background position.
-						if (x = $image_img.data('position'))
-							$image.css('background-position', x);
+						// Set background position.
+							if (x = $image_img.data('position'))
+								$image.css('background-position', x);
 
-					// Hide original img.
-						$image_img.hide();
+						// Hide original img.
+							$image_img.hide();
+					
+					updatedThumbSet.add($this);
+				});
+			}
 
-			});
+			updateThumbBackground();
+			$window.on('resize scroll', updateThumbBackground);
 
 		// Poptrox.
 			$main.poptrox({
