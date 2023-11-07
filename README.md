@@ -2,6 +2,12 @@
 
 See the remake here: <https://dragondelune.github.io/tr-17-birthday-cards/>.
 
+## Known Bugs
+
+### Nav next/previous goes wrong after shuffling the articles
+
+Template's library: poptrox.js doesn't support this very well.
+
 ## Sources
 
 - <https://www.talesrunner.com.hk/event/202307Fairytale17thAnniversaryCelebration/>
