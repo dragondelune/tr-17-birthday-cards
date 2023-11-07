@@ -248,6 +248,7 @@ function shuffleArray(array) {
 		usePopupForceClose: true,
 		usePopupLoader: true,
 		usePopupNav: true,
+		usePopupEasyClose: false,
 		windowMargin: 50
 	});
 
