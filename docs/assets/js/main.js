@@ -4,18 +4,6 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-const updatedThumbSet = new Set();
-
-$.fn.isInViewport = function () {
-	var elementTop = $(this).offset().top;
-	var elementBottom = elementTop + $(this).outerHeight();
-
-	var viewportTop = $(window).scrollTop();
-	var viewportBottom = viewportTop + $(window).height();
-
-	return elementBottom > viewportTop && elementTop < viewportBottom;
-};
-
 // https://stackoverflow.com/a/12646864/13109740
 function shuffleArray(array) {
 	for (let i = array.length - 1; i > 0; i--) {
@@ -229,43 +217,6 @@ function shuffleArray(array) {
 
 	// Main.
 	var $main = $('#main');
-
-	// Thumbs.
-	function updateThumbBackground() {
-		$main.children('.thumb').each(function () {
-			var $this = $(this);
-			if (updatedThumbSet.has($this) || !$this.isInViewport()) {
-				return;
-			}
-
-			var $this = $(this),
-				$image = $this.find('.image'), $image_img = $image.children('img'),
-				x;
-
-			// No image? Bail.
-			if ($image.length == 0)
-				return;
-
-			// Image.
-			// This sets the background of the "image" <span> to the image pointed to by its child
-			// <img> (which is then hidden). Gives us way more flexibility.
-
-			// Set background.
-			$image.css('background-image', 'url(' + $image_img.attr('src') + ')');
-
-			// Set background position.
-			if (x = $image_img.data('position'))
-				$image.css('background-position', x);
-
-			// Hide original img.
-			$image_img.hide();
-
-			updatedThumbSet.add($this);
-		});
-	}
-
-	updateThumbBackground();
-	$window.on('scroll', updateThumbBackground);
 
 	// Poptrox.
 	$main.poptrox({

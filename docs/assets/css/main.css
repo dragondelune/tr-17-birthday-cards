@@ -2052,6 +2052,12 @@ input, select, textarea {
 
 /* Added on top of the template */
 
+	#main .thumb img {
+		width: inherit;
+		height: inherit;
+		object-fit: cover;
+	}
+
 	.info {
 		display: flex;
 		flex-direction: column;
