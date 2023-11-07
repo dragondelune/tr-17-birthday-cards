@@ -2108,3 +2108,11 @@ input, select, textarea {
 	#footer section p {
 		white-space: pre-wrap;
 	}
+
+	#header button {
+		padding: 0 1em;
+	}
+
+	#header button.icon:before {
+		margin: 0;
+	}

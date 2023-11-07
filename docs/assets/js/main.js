@@ -260,4 +260,11 @@ function shuffleArray(array) {
 		$main[0]._poptrox.windowMargin = 50;
 	});
 
+	$('#randomShuffleButton').on('click', function () {
+		let articles = $main.find('article.thumb');
+		let articleArr = Array.prototype.slice.call(articles, 0);
+		shuffleArray(articleArr);
+		document.querySelector("#main").replaceChildren(...articleArr);
+	});
+
 })(jQuery);
